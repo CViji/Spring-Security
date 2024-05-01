@@ -92,6 +92,23 @@ public class RegisterationController {
         }
     }
 
+    @PostMapping("/changePassword")
+    public String changePassword(@RequestBody PasswordModel passwordModel)
+    {
+        User user = userService.findUserByEmail(passwordModel.getEmail());
+        if(user != null)
+        {
+            if(!userService.checkIfValidPassword(user, passwordModel.getOldPassword()))
+            {
+                return "Invalid Old Password";
+            }
+            userService.changePassword(user, passwordModel.getNewPassword());
+            return "Password Changed Successfully";
+        }
+        return "Invalid User/ User Not Exists";
+
+    }
+
     private String passwordResetTokenMail(User user, String applicationUrl, String token) {
         String url = applicationUrl
                 + "/savePassword?token="

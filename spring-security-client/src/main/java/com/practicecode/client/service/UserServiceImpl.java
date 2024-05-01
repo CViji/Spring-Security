@@ -116,4 +116,9 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public boolean checkIfValidPassword(User user, String oldPassword) {
+        return passwordEncoder.matches(oldPassword, user.getPassword());
+    }
+
 }
