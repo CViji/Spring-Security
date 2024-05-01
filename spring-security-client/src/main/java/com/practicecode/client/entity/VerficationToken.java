@@ -1,7 +1,9 @@
 package com.practicecode.client.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -10,6 +12,8 @@ import java.util.Date;
 @Entity
 @Data
 @NoArgsConstructor
+@Getter
+@Setter
 public class VerficationToken {
 
     private static final int EXPIRATION_TIME = 10;

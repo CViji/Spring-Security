@@ -1,6 +1,7 @@
 package com.practicecode.client.service;
 
 import com.practicecode.client.entity.User;
+import com.practicecode.client.entity.VerficationToken;
 import com.practicecode.client.model.UserModel;
 
 public interface UserService {
@@ -9,4 +10,6 @@ public interface UserService {
     void saveVerificationTokenForUser(String token, User user);
 
     String validateVerificationToken(String token);
+
+    VerficationToken generateNewVerificationToken(String oldToken);
 }
