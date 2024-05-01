@@ -6,10 +6,12 @@ import com.practicecode.client.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Slf4j
+@Component
 public class RegisterationCompleteEventListener implements ApplicationListener<RegisterationCompleteEvent> {
 
     @Autowired
@@ -24,7 +26,7 @@ public class RegisterationCompleteEventListener implements ApplicationListener<R
 
         // Send the mail to the User
         String url = event.getApplicationUrl()
-                + "verifyRegisteration?token="
+                + "/verifyRegisteration?token="
                 + token;
 
         // Send VerficationEmail()

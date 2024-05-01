@@ -6,10 +6,7 @@ import com.practicecode.client.model.UserModel;
 import com.practicecode.client.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,9 +30,24 @@ public class RegisterationController {
         return "Success";
     }
 
+    @GetMapping("/verifyRegisteration")
+    public String verifyRegisteration(@RequestParam("token") String token)
+    {
+        String result = userService.validateVerificationToken(token);
+        if(result.equalsIgnoreCase("valid"))
+        {
+            return "User Verified Successfully";
+        }
+        else
+        {
+            return "Bad User/Token Expired";
+        }
+    }
+
     private String applicationUrl(HttpServletRequest request) {
         return "http://" +
                 request.getServerName() +
+                ":"+
                 request.getServerPort() +
                 request.getContextPath();
     }
